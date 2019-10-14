@@ -41,12 +41,21 @@ VALUES
 (1, 2),
 (1, 3);
 
+DROP TABLE if EXISTS product_categories;
+CREATE TABLE product_categories (id bigserial PRIMARY KEY, title varchar(255));
+INSERT INTO product_categories (title) VALUES
+('food'), ('detergents'), ('clothes');
+
 DROP TABLE IF EXISTS products;
-CREATE TABLE products (id bigserial PRIMARY KEY, title varchar(255), price numeric(8, 2));
-INSERT INTO products (title, price) VALUES
-('Cheese', 320.0),
-('Milk', 90.0),
-('Apples', 120.0);
+CREATE TABLE products (id bigserial PRIMARY KEY, title varchar(255), price numeric(8, 2), category_id bigint, FOREIGN KEY (caterory_id) REFERENCES product_categories(id));
+INSERT INTO products (title, price, category_id) VALUES
+('Cheese', 320.0, 1),
+('Milk', 90.0, 1),
+('Apples', 120.0, 1),
+('shampoo', 500.0, 2),
+('soap', 70, 2),
+('cap', 499.99, 3),
+('jeans', 3999.99, 3);
 
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (id bigserial PRIMARY KEY, user_id bigint, price numeric(8, 2), phone varchar(15), address varchar(255), status varchar(255), created_at timestamp, updated_at timestamp, FOREIGN KEY (user_id) REFERENCES users (id));
