@@ -47,7 +47,7 @@ INSERT INTO product_categories (title) VALUES
 ('food'), ('detergents'), ('clothes');
 
 DROP TABLE IF EXISTS products;
-CREATE TABLE products (id bigserial PRIMARY KEY, title varchar(255), price numeric(8, 2), category_id bigint, FOREIGN KEY (caterory_id) REFERENCES product_categories(id));
+CREATE TABLE products (id bigserial PRIMARY KEY, title varchar(255), price numeric(8, 2), category_id bigint, FOREIGN KEY (category_id) REFERENCES product_categories(id));
 INSERT INTO products (title, price, category_id) VALUES
 ('Cheese', 320.0, 1),
 ('Milk', 90.0, 1),
